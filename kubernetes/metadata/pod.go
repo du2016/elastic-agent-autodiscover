@@ -96,7 +96,17 @@ func (p *pod) GenerateK8s(obj kubernetes.Resource, opts ...FieldOptions) mapstr.
 			dep := p.getRSDeployment(rsName, po.GetNamespace())
 			if dep != "" {
 				_, _ = out.Put("deployment.name", dep)
+				_, _ = out.Put("workload.name", dep)
+				_, _ = out.Put("workload.type", "deployment")
 			}
+		}
+	}
+	if p.addResourceMetadata.CloneSet {
+		csName, _ := out.GetValue("cloneset.name")
+		if csName, ok := csName.(string); ok {
+			_, _ = out.Put("cloneset.name", csName)
+			_, _ = out.Put("workload.name", csName)
+			_, _ = out.Put("workload.type", "cloneset")
 		}
 	}
 
@@ -107,6 +117,8 @@ func (p *pod) GenerateK8s(obj kubernetes.Resource, opts ...FieldOptions) mapstr.
 			dep := p.getCronjobOfJob(jobName, po.GetNamespace())
 			if dep != "" {
 				_, _ = out.Put("cronjob.name", dep)
+				_, _ = out.Put("workload.name", dep)
+				_, _ = out.Put("workload.type", "cronjob")
 			}
 		}
 	}

@@ -38,6 +38,7 @@ type AddResourceMetadataConfig struct {
 	Namespace  *config.C `config:"namespace"`
 	Deployment bool      `config:"deployment"`
 	CronJob    bool      `config:"cronjob"`
+	CloneSet   bool      `config:"cloneset"`
 }
 
 // InitDefaults initializes the defaults for the config.

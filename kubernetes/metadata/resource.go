@@ -145,7 +145,8 @@ func (r *Resource) GenerateK8s(kind string, obj kubernetes.Resource, options ...
 				"StatefulSet",
 				"DaemonSet",
 				"Job",
-				"CronJob":
+				"CronJob",
+				"CloneSet":
 				_ = safemapstr.Put(meta, strings.ToLower(ref.Kind)+".name", ref.Name)
 			}
 		}
